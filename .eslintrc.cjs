@@ -32,6 +32,12 @@ module.exports = {
     'import/named': 'off',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true
+      }
+    ]
   }
 };
