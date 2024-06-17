@@ -18,7 +18,8 @@ module.exports = {
     project: [
       './tsconfig.json',
       './@app/client/tsconfig.json',
-      './@app/client/tsconfig.node.json'
+      './@app/client/tsconfig.node.json',
+      './@app/server/tsconfig.json'
     ],
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -37,6 +38,15 @@ module.exports = {
       'error',
       {
         devDependencies: true
+      }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
       }
     ]
   }

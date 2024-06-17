@@ -34,5 +34,5 @@
   //   "./.eslintrc",
   // ]
   "include": ["src"],
-  "references": [{ "path": "@app/client" }]
+  "references": [{ "path": "@app/client" }, { "path": "@app/server" }]
 }
