@@ -22,6 +22,7 @@ function App() {
         <button
           type="button"
           onClick={() => setCount((prevState) => prevState + 1)}
+          className="bg-brand-main md:text-yellow-700"
         >
           count is {count}
         </button>

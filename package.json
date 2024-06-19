@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "client": "pnpm --filter @app/client",
     "dev": "pnpm --recursive --parallel dev",
+    "build": "pnpm --recursive --parallel build",
     "lint": "pnpm --recursive --parallel lint"
   },
   "keywords": [],

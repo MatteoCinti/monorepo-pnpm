@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+
 import handleError from './errorHandler';
 
 const app: Express = express();
