@@ -11,6 +11,7 @@
     "dev": "pnpm --recursive --parallel dev",
     "build": "pnpm --recursive --parallel build",
     "lint": "pnpm --recursive --parallel lint",
+    "prettier": "prettier --write $(git diff --name-only --diff-filter d | grep '.js$' | xargs)",
     "prepare": "husky"
   },
   "keywords": [],
