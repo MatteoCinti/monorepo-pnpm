@@ -8,6 +8,7 @@
   },
   "scripts": {
     "client": "pnpm --filter @app/client",
+    "server": "pnpm --filter @app/server",
     "dev": "pnpm --recursive --parallel dev",
     "build": "pnpm --recursive --parallel build",
     "lint": "pnpm --recursive --parallel lint",
