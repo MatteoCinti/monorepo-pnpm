@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 
-import handleError from './errorHandler';
+import handleError from './error-handler';
 
 const app: Express = express();
 const port = Number(process.env.PORT) || 3000;
