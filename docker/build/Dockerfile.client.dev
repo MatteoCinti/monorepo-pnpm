@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20-bullsey
 
 WORKDIR /var/www
 
@@ -8,7 +8,7 @@ COPY packages/tailwind-config ./packages/tailwind-config
 # COPY ./packages/ui-lib ./packages/ui-lib
 
 RUN npm install -g pnpm
-RUN pnpm install
+RUN --mount=type=cache,id=pnpm,target=/var/www/pnpm/store pnpm install --frozen-lockfile
 
 EXPOSE 5173
 ENTRYPOINT [ "pnpm","client", "dev", "--host", "0.0.0.0" ]
