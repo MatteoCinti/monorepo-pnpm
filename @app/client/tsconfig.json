@@ -5,7 +5,8 @@
     "rootDir": "src",
     "outDir": "dist",
     "jsx": "react-jsx",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM"]
   },
   "references": [{ "path": "./tsconfig.node.json" }]
 }

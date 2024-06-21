@@ -2,6 +2,7 @@ version: '3.9'
 services:
   web-app:
     image: web-app
+    container_name: web-app
     build:
       context: ../../
       dockerfile: ./docker/build/Dockerfile.client.dev
@@ -21,6 +22,7 @@ services:
       - 3000:5173
   api:
     image: api
+    container_name: api
     build:
       context: ../../
       dockerfile: ./docker/build/Dockerfile.server.dev

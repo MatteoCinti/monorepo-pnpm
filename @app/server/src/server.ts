@@ -4,11 +4,10 @@ import handleError from './error-handler';
 
 const app: Express = express();
 const port = Number(process.env.PORT) || 4000;
-
 app.use(express.json());
 
 app.get('/', (_req, res) => {
-  res.json({ message: 'welcome wq w' });
+  res.json({ message: 'welcome wefw sa' });
 });
 
 /* Error handler middleware */
