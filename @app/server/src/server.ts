@@ -3,12 +3,12 @@ import express, { Express } from 'express';
 import handleError from './error-handler';
 
 const app: Express = express();
-const port = Number(process.env.PORT) || 3000;
+const port = Number(process.env.PORT) || 8000;
 
 app.use(express.json());
 
 app.get('/', (_req, res) => {
-  res.json({ message: 'ok' });
+  res.json({ message: 'welcome' });
 });
 
 /* Error handler middleware */

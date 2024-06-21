@@ -1,5 +1,0 @@
-{
-  "watch": ["src"],
-  "ext": "ts, tsx",
-  "exec": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
-}

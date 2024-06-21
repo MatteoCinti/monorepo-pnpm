@@ -12,6 +12,7 @@
     "dev": "pnpm --recursive --parallel dev",
     "build": "pnpm --recursive --parallel build",
     "lint": "pnpm --recursive --parallel lint",
+    "start": "pnpm --recursive --parallel start",
     "prettier": "pretty-quick --verbose --staged",
     "prepare": "husky"
   },
