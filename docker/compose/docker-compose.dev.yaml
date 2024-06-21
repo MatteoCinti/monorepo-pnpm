@@ -31,7 +31,7 @@ services:
       - type: volume
         target: /var/www/@app/server/node_modules
     ports:
-      - 4000:8000
+      - 4000:4000
 
   # networks:
   #   frontend:
