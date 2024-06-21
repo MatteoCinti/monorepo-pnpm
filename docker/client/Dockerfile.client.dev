@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /var/www
+
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs ./
+COPY @app/client ./@app/client
+COPY packages/tailwind-config ./packages/tailwind-config
+# COPY ./packages/ui-lib ./packages/ui-lib
+
+RUN npm install -g pnpm
+RUN pnpm install
+
+EXPOSE 5173
+ENTRYPOINT [ "pnpm", "client", "dev", "--host", "0.0.0.0" ]

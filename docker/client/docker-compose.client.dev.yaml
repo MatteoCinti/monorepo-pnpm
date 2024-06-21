@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  web-app:
+    image: web-app
+    build:
+      context: ../../
+      dockerfile: ./docker/client/Dockerfile.client.dev
+    init: true
+    volumes:
+      - type: bind
+        source: ../../@app/client
+        target: /var/www/@app/client
+      - type: volume
+        target: /var/www/@app/client/node_modules
+      - type: bind
+        source: ../../@app/client/vite.config.ts
+        target: /var/www/@app/client/vite.config.ts
+    # networks:
+    #   - frontend
+    ports:
+      - 5173:5173
+  # networks:
+  #   frontend:
