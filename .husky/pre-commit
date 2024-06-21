@@ -1,4 +1,2 @@
 pnpm prettier
 pnpm lint
-
-git add .

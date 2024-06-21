@@ -4,7 +4,7 @@ services:
     image: web-app
     build:
       context: ../../
-      dockerfile: ./docker/client/Dockerfile.client.dev
+      dockerfile: ./docker/build/Dockerfile.client.dev
     init: true
     volumes:
       - type: bind
@@ -18,6 +18,20 @@ services:
     # networks:
     #   - frontend
     ports:
-      - 5173:5173
+      - 3000:5173
+  api:
+    image: api
+    build:
+      context: ../../
+      dockerfile: ./docker/build/Dockerfile.server.dev
+    volumes:
+      - type: bind
+        source: ../../@app/server
+        target: /var/www/@app/server
+      - type: volume
+        target: /var/www/@app/server/node_modules
+    ports:
+      - 4000:8000
+
   # networks:
   #   frontend:
