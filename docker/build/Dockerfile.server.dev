@@ -1,12 +1,14 @@
 FROM node:20-bullseye-slim
 
-WORKDIR /var/www
+ARG APP_WORKDIR=/var/www
+
+WORKDIR $APP_WORKDIR
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json .eslintrc.cjs  ./
 COPY @app/server ./@app/server
 
 RUN npm install -g pnpm
-RUN --mount=type=cache,id=pnpm,target=/var/www/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --frozen-lockfile
 
 EXPOSE 8000
 ENTRYPOINT [ "pnpm", "srv", "dev"]
