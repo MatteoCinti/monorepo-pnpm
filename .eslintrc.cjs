@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb-typescript',
+    'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:import/recommended',
     'prettier'
   ],

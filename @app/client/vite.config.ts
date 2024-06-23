@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
-// @ts-ignore - eslintPlugin is not typed
+// @ts-expect-error - eslintPlugin is not typed
 import eslintPlugin from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
