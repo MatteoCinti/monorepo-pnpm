@@ -6,6 +6,10 @@ settings:
 
 importers:
   .:
+    dependencies:
+      typescript:
+        specifier: ^5.2.2
+        version: 5.4.5
     devDependencies:
       '@types/node':
         specifier: ^20.14.2
@@ -64,9 +68,6 @@ importers:
       pretty-quick:
         specifier: ^4.0.0
         version: 4.0.0(prettier@3.3.2)
-      typescript:
-        specifier: ^5.2.2
-        version: 5.4.5
 
   '@app/client':
     dependencies:

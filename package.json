@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "author": "Matteo Cinti",
+  "license": "ISC",
   "engines": {
     "node": ">=20"
   },
+  "keywords": [
+    "monorepo",
+    "pnpm"
+  ],
   "scripts": {
     "client": "pnpm --filter @app/client",
     "srv": "pnpm --filter @app/server",
@@ -14,11 +20,8 @@
     "lint": "pnpm --recursive --parallel lint",
     "start": "pnpm --recursive --parallel start",
     "prettier": "pretty-quick --verbose --staged",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.14.2",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
