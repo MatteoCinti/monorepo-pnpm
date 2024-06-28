@@ -43,7 +43,7 @@ function App() {
       </div>
 
       <div className="server-card">
-        <h1>It is {backendTime} on the Server, Cuba</h1>
+        <h1>Son las {backendTime} de la mañana en La Havana, Cuba</h1>
       </div>
 
       <p className="read-the-docs">
