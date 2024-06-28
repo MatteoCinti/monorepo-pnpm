@@ -1,0 +1,40 @@
+version: '3.9'
+name: monorepo_prod
+services:
+  web-app:
+    init: true
+    image: img_monorepo-web-app_prod
+    container_name: ctr_web-app_prod
+    build:
+      context: ../../
+      dockerfile: ./docker/build/Dockerfile.client.prod
+    volumes:
+      - nginx-log:/var/log/nginx
+    environment:
+      - NETWORK_ENV=docker
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+
+  api:
+    image: img_morepo-api_prod
+    container_name: ctr_api_prod
+    build:
+      context: ../../
+      dockerfile: ./docker/build/Dockerfile.server.prod
+    ports:
+      - 4000:4000
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+    name: net_morepo-frontend_prod
+  backend:
+    name: net_monorepo-backend_prod
+
+volumes:
+  nginx-log:
+    driver: local

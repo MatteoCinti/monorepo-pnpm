@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-main': '#000000'
+        'brand-main': '#FFA000'
       }
     }
   },

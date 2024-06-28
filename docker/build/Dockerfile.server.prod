@@ -4,7 +4,7 @@ ARG APP_WORKDIR=/var/www
 
 WORKDIR $APP_WORKDIR
 
-COPY COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs ./
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs ./
 COPY @app/server/package.json ./@app/server/package.json
 
 RUN npm install -g pnpm
@@ -29,4 +29,4 @@ RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --fro
 
 EXPOSE 4000
 
-CMD [ "node", "srv", "start" ]
+CMD [ "pnpm", "srv", "start" ]

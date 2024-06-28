@@ -4,7 +4,7 @@ services:
   web-app:
     init: true
     image: img_monorepo-web-app_dev
-    container_name: web-app
+    container_name: ctr_web-app_dev
     build:
       context: ../../
       dockerfile: ./docker/build/Dockerfile.client.dev
@@ -26,7 +26,7 @@ services:
 
   api:
     image: img_morepo-api_dev
-    container_name: api
+    container_name: ctr_api_dev
     build:
       context: ../../
       dockerfile: ./docker/build/Dockerfile.server.dev
