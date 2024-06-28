@@ -1,0 +1,32 @@
+FROM node:20-bullseye-slim  AS build
+
+ARG APP_WORKDIR=/var/www
+
+WORKDIR $APP_WORKDIR
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json .eslintrc.cjs  ./
+COPY @app/server/package.json ./@app/server/package.json
+
+RUN npm install -g pnpm
+RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --frozen-lockfile
+
+COPY --chown=node:node @app/server /$APP_WORKDIR/@app/server
+RUN pnpm srv build
+
+# Serve production built files
+FROM node:20-bullseye-slim
+ARG APP_WORKDIR=/var/www
+ENV NODE_ENV production
+
+WORKDIR $APP_WORKDIR
+
+COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/dist ./@app/server/dist
+COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/package.json ./@app/server/package.json
+COPY --chown=node:node --link package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+RUN npm install -g pnpm
+RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --frozen-lockfile --production
+
+EXPOSE 4000
+
+CMD [ "node", "srv", "start" ]

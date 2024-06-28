@@ -10,5 +10,5 @@ COPY @app/server ./@app/server
 RUN npm install -g pnpm
 RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --frozen-lockfile
 
-EXPOSE 8000
+EXPOSE 4000
 ENTRYPOINT [ "pnpm", "srv", "dev"]

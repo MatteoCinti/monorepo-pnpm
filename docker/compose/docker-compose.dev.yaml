@@ -1,8 +1,9 @@
 version: '3.9'
+name: monorepo_dev
 services:
   web-app:
     init: true
-    image: web-app
+    image: img_monorepo-web-app_dev
     container_name: web-app
     build:
       context: ../../
@@ -17,10 +18,12 @@ services:
         source: ../../@app/client/vite.config.ts
         target: /var/www/@app/client/vite.config.ts
     ports:
-      - 3000:3000
+      - 8080:8080
+    networks:
+      - frontend
 
   api:
-    image: api
+    image: img_morepo-api_dev
     container_name: api
     build:
       context: ../../
@@ -33,3 +36,12 @@ services:
         target: /var/www/@app/server/node_modules
     ports:
       - 4000:4000
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+    name: net_morepo-frontend_dev
+  backend:
+    name: net_monorepo-backend_dev

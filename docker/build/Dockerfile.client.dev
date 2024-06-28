@@ -12,5 +12,5 @@ COPY packages/tailwind-config ./packages/tailwind-config
 RUN npm install -g pnpm
 RUN --mount=type=cache,id=pnpm,target=$APP_WORKIR/pnpm/store pnpm install --frozen-lockfile
 
-EXPOSE 3000
+EXPOSE 8080
 ENTRYPOINT [ "pnpm","client", "dev", "--host", "0.0.0.0" ]

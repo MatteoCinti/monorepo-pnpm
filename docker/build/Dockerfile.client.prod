@@ -1,6 +1,6 @@
 FROM node:20.14-bullseye-slim AS build
 
-ARG APP_WORKDIR=var/www
+ARG APP_WORKDIR=/var/www
 ENV HUSKY = 0
 
 WORKDIR $APP_WORKDIR
