@@ -13,4 +13,4 @@ RUN npm install -g pnpm
 RUN --mount=type=cache,id=pnpm,target=$APP_WORKIR/pnpm/store pnpm install --frozen-lockfile
 
 EXPOSE 8080
-ENTRYPOINT [ "pnpm","client", "dev", "--host", "0.0.0.0" ]
+ENTRYPOINT [ "pnpm", "client", "dev", "--host", "0.0.0.0" ]

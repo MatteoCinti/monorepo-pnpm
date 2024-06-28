@@ -8,5 +8,6 @@
     "moduleResolution": "bundler",
     "lib": ["ESNext", "DOM"]
   },
+  "types": ["vite/client"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

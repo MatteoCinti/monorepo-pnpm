@@ -6,8 +6,8 @@ module.exports = {
     node: true
   },
   extends: [
-    'airbnb',
-    'airbnb-typescript',
+    'airbnb/base',
+    'airbnb-typescript/base',
     'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:import/recommended',
     'prettier'

@@ -1,11 +1,21 @@
 import './app.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import reactLogo from './assets/react.svg';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [backendTime, setBackendTime] = useState('UNKOWN');
+
+  useEffect(() => {
+    fetch('/api/serverTime')
+      .then((res) => res.json())
+      .then((data) => {
+        setBackendTime(data.message);
+      });
+  }, []);
+
   return (
     <>
       <div>
@@ -26,9 +36,16 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit
+          <code>src/App.tsx</code>
+          and save to test HMR
         </p>
       </div>
+
+      <div className="server-card">
+        <h1>It is {backendTime} on the Server, Cuba</h1>
+      </div>
+
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>

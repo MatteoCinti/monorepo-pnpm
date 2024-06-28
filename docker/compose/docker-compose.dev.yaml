@@ -17,6 +17,8 @@ services:
       - type: bind
         source: ../../@app/client/vite.config.ts
         target: /var/www/@app/client/vite.config.ts
+    environment:
+      - NETWORK_ENV=docker
     ports:
       - 8080:8080
     networks:
@@ -32,8 +34,6 @@ services:
       - type: bind
         source: ../../@app/server
         target: /var/www/@app/server
-      - type: volume
-        target: /var/www/@app/server/node_modules
     ports:
       - 4000:4000
     networks:

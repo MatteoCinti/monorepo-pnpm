@@ -1,5 +1,5 @@
 {
   "watch": ["src"],
-  "ext": "ts, tsx",
-  "exec": "eslint src --ext .js,.jsx,.ts,.tsx --fix && tsx src/server.ts --clear-screen=false"
+  "ext": "ts",
+  "exec": "eslint src --ext .ts --fix && tsx src/server.ts --clear-screen=false"
 }

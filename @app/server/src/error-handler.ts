@@ -7,6 +7,7 @@ function handleError(
   _next: NextFunction
 ) {
   const statusCode = res.statusCode || 500;
+  // eslint-disable-next-line no-console
   console.error('Oops something went wrong', err.message, err.stack);
   res.status(statusCode).json({ message: err.message });
 }
