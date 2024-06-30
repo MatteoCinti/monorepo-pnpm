@@ -1,5 +1,7 @@
 {
+  "build": "swc src --out-dir dist",
+  "start": "node dist/src/index.js",
   "watch": ["src"],
   "ext": "ts",
-  "exec": "eslint src --ext .ts --fix && tsx src/server.ts --clear-screen=false"
+  "exec": "eslint src --ext .ts --fix && pnpm run build && pnpm start"
 }

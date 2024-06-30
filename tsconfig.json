@@ -2,9 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "useDefineForClassFields": true,
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
