@@ -2,11 +2,10 @@
   "extends": "../../tsconfig.json",
   "include": ["src"],
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
+    "lib": ["ESNext", "DOM"],
     "jsx": "react-jsx",
-    "moduleResolution": "bundler",
-    "lib": ["ESNext", "DOM"]
+    "rootDir": "src",
+    "outDir": "dist"
   },
   "types": ["vite/client"],
   "references": [{ "path": "./tsconfig.node.json" }]
