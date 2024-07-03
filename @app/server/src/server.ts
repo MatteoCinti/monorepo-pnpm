@@ -1,7 +1,10 @@
+import 'dotenv/config';
+
 import cors from 'cors';
 import express, { Express } from 'express';
 
 import handleError from './error-handler';
+import mongoDb from './providers/mongo';
 
 const app: Express = express();
 const port = Number(process.env.PORT ?? 4000);
@@ -14,19 +17,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/', (_req, res) => {
-  res.json({ message: 'welcome wefw sa' });
+app.get('/', async (_req, res) => {
+  res.json({ message: 'welcome' });
 });
 
-app.get('/serverTime', (_req, res) => {
+app.get('/serverTime', async (_req, res) => {
   const localTime = new Date().toLocaleString();
-  res.json({ message: localTime });
+  const users = await mongoDb.db().collection('users').find().toArray();
+  // eslint-disable-next-line no-console
+  console.log('🚀 ~ app.get ~ users:', users);
+  res.json({ serverTime: localTime, dbTime: users });
 });
 
 // Error handler middleware
 app.use(handleError);
 
-app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Example app listening at http://localhost:${port.toString()}`);
+mongoDb.connect(() => {
+  app.listen(port, () => {
+    // eslint-disable-next-line no-console
+    console.log(`Server running on port ${port}`);
+  });
 });
