@@ -44,7 +44,7 @@ services:
 
   mongo:
     image: mongo:4.4.29
-    container_name: ctr_db_dev
+    container_name: ctr_mongo_dev
     command: mongod --auth --logpath=/dev/null # --quiet
     env_file: '../../@app/server/.env'
     ports:

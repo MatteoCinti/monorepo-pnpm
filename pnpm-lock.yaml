@@ -113,9 +113,6 @@ importers:
       mongodb:
         specifier: ^6.8.0
         version: 6.8.0
-      mongoose:
-        specifier: ^8.4.4
-        version: 8.4.4
     devDependencies:
       '@swc/cli':
         specifier: ^0.4.0
@@ -3174,13 +3171,6 @@ packages:
       }
     engines: { node: '>=4.0' }
 
-  kareem@2.6.3:
-    resolution:
-      {
-        integrity: sha512-C3iHfuGUXK2u8/ipq9LfjFfXFxAZMQJJq7vLS45r3D9Y2xQ/m4S8zaR4zMLFWh9AsNPXmcFfUDhTEO8UIC/V6Q==
-      }
-    engines: { node: '>=12.0.0' }
-
   keyv@4.5.4:
     resolution:
       {
@@ -3423,36 +3413,6 @@ packages:
         integrity: sha512-XqMGwRX0Lgn05TDB4PyG2h2kKO/FfWJyCzYQbIhXUxz7ETt0I/FqHjUeqj37irJ+Dl1ZtU82uYyj14u2XsZKfg==
       }
 
-  mongodb@6.6.2:
-    resolution:
-      {
-        integrity: sha512-ZF9Ugo2JCG/GfR7DEb4ypfyJJyiKbg5qBYKRintebj8+DNS33CyGMkWbrS9lara+u+h+yEOGSRiLhFO/g1s1aw==
-      }
-    engines: { node: '>=16.20.1' }
-    peerDependencies:
-      '@aws-sdk/credential-providers': ^3.188.0
-      '@mongodb-js/zstd': ^1.1.0
-      gcp-metadata: ^5.2.0
-      kerberos: ^2.0.1
-      mongodb-client-encryption: '>=6.0.0 <7'
-      snappy: ^7.2.2
-      socks: ^2.7.1
-    peerDependenciesMeta:
-      '@aws-sdk/credential-providers':
-        optional: true
-      '@mongodb-js/zstd':
-        optional: true
-      gcp-metadata:
-        optional: true
-      kerberos:
-        optional: true
-      mongodb-client-encryption:
-        optional: true
-      snappy:
-        optional: true
-      socks:
-        optional: true
-
   mongodb@6.8.0:
     resolution:
       {
@@ -3482,27 +3442,6 @@ packages:
         optional: true
       socks:
         optional: true
-
-  mongoose@8.4.4:
-    resolution:
-      {
-        integrity: sha512-Nya808odIJoHP4JuJKbWA2eIaerXieu59kE8pQlvJpUBoSKWUyhLji0g1WMVaYXWmzPYXP2Jd6XdR4KJE8RELw==
-      }
-    engines: { node: '>=16.20.1' }
-
-  mpath@0.9.0:
-    resolution:
-      {
-        integrity: sha512-ikJRQTk8hw5DEoFVxHG1Gn9T/xcjtdnOKIU1JTmGjZZlg9LST2mBLmcX3/ICIbgJydT2GOc15RnNy5mHmzfSew==
-      }
-    engines: { node: '>=4.0.0' }
-
-  mquery@5.0.0:
-    resolution:
-      {
-        integrity: sha512-iQMncpmEK8R8ncT8HJGsGc9Dsp8xcgYMVSbs5jgnm1lFHTZqMJTUWTDx1LBO8+mK3tPNZWFLBghQEIOULSTHZg==
-      }
-    engines: { node: '>=14.0.0' }
 
   mri@1.2.0:
     resolution:
@@ -4414,12 +4353,6 @@ packages:
         integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==
       }
     engines: { node: '>= 0.4' }
-
-  sift@17.1.3:
-    resolution:
-      {
-        integrity: sha512-Rtlj66/b0ICeFzYTuNvX/EF1igRbbnGSvEyT79McoZa/DeGhMyC5pWKOEsZKnpkqtSeovd5FL/bjHWC3CIIvCQ==
-      }
 
   signal-exit@3.0.7:
     resolution:
@@ -6955,8 +6888,6 @@ snapshots:
       object.assign: 4.1.5
       object.values: 1.2.0
 
-  kareem@2.6.3: {}
-
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
@@ -7082,44 +7013,11 @@ snapshots:
       '@types/whatwg-url': 11.0.5
       whatwg-url: 13.0.0
 
-  mongodb@6.6.2:
-    dependencies:
-      '@mongodb-js/saslprep': 1.1.7
-      bson: 6.8.0
-      mongodb-connection-string-url: 3.0.1
-
   mongodb@6.8.0:
     dependencies:
       '@mongodb-js/saslprep': 1.1.7
       bson: 6.8.0
       mongodb-connection-string-url: 3.0.1
-
-  mongoose@8.4.4:
-    dependencies:
-      bson: 6.8.0
-      kareem: 2.6.3
-      mongodb: 6.6.2
-      mpath: 0.9.0
-      mquery: 5.0.0
-      ms: 2.1.3
-      sift: 17.1.3
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-providers'
-      - '@mongodb-js/zstd'
-      - gcp-metadata
-      - kerberos
-      - mongodb-client-encryption
-      - snappy
-      - socks
-      - supports-color
-
-  mpath@0.9.0: {}
-
-  mquery@5.0.0:
-    dependencies:
-      debug: 4.3.5(supports-color@5.5.0)
-    transitivePeerDependencies:
-      - supports-color
 
   mri@1.2.0: {}
 
@@ -7628,8 +7526,6 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.2.4
       object-inspect: 1.13.1
-
-  sift@17.1.3: {}
 
   signal-exit@3.0.7: {}
 

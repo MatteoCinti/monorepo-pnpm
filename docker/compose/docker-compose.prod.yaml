@@ -29,6 +29,26 @@ services:
       - frontend
       - backend
 
+  mongo:
+    image: mongo:4.4.29
+    container_name: ctr_mongo_prod
+    command: mongod --auth --logpath=/dev/null # --quiet
+    env_file: '../../@app/server/.env'
+    ports:
+      - '27021:27017'
+    restart: 'unless-stopped'
+    volumes:
+      - db_data:/data/db¨
+      - ../../@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - backend
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_NON_ROOT_USERNAME: ${MONGO_DB_USERNAME}
+      MONGO_NON_ROOT_PASSWORD: ${MONGO_DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_NAME}
+
 networks:
   frontend:
     name: net_morepo-frontend_prod
@@ -36,5 +56,6 @@ networks:
     name: net_monorepo-backend_prod
 
 volumes:
+  db_data:
   nginx-log:
     driver: local
