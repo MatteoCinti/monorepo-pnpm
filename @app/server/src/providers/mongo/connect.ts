@@ -18,7 +18,7 @@ async function connect(callback?: () => void) {
     return mongodb;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error connecting to the database');
+    console.error('Error connecting to the database', error);
     return error;
   }
 }
@@ -28,7 +28,7 @@ async function get() {
     return await connect();
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error connecting to the database');
+    console.error('Error connecting to the database', error);
     return error;
   }
 }

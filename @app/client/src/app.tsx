@@ -7,12 +7,14 @@ import reactLogo from './assets/react.svg';
 function App() {
   const [count, setCount] = useState(0);
   const [backendTime, setBackendTime] = useState('UNKOWN');
+  const [successDbConnectetion, setSuccessDbConnectetion] = useState(false);
 
   useEffect(() => {
     fetch('/api/serverTime')
       .then((res) => res.json())
       .then((data) => {
-        setBackendTime(data.message);
+        setBackendTime(data.serverTime);
+        setSuccessDbConnectetion(data.dbConnection);
       });
   }, []);
 
@@ -44,6 +46,13 @@ function App() {
 
       <div className="server-card">
         <h1>Son las {backendTime} de la mañana en La Havana, Cuba</h1>
+      </div>
+
+      <div className="db-card">
+        <h1>
+          You are {successDbConnectetion ? 'successfully' : 'NOT'} connected to
+          the database
+        </h1>
       </div>
 
       <p className="read-the-docs">

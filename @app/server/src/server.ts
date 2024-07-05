@@ -22,11 +22,16 @@ app.get('/', async (_req, res) => {
 });
 
 app.get('/serverTime', async (_req, res) => {
-  const localTime = new Date().toLocaleString();
-  const users = await mongoDb.db().collection('users').find().toArray();
-  // eslint-disable-next-line no-console
-  console.log('🚀 ~ app.get ~ users:', users);
-  res.json({ serverTime: localTime, dbTime: users });
+  try {
+    const localTime = new Date().toLocaleString();
+
+    res.json({
+      serverTime: localTime,
+      dbConnection: !mongoDb.get()
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching data' });
+  }
 });
 
 // Error handler middleware

@@ -5,7 +5,6 @@
   "engines": {
     "node": ">=20"
   },
-  "type": "module",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "build": "rm -rf ./dist && swc src --out-dir dist",
