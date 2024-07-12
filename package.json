@@ -20,6 +20,7 @@
     "lint": "pnpm --recursive --parallel lint",
     "start": "pnpm --recursive --parallel start",
     "prettier": "pretty-quick --verbose --staged",
+    "monorepo:init": "./monorepo-init.sh",
     "prepare": "husky || true"
   },
   "devDependencies": {
