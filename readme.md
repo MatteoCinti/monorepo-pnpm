@@ -46,10 +46,6 @@ On first build of the container MongoDB will create users for the database if yo
 
 `docker compose -f ./docker/compose/docker-compose.dev.yaml down --rmi=all --volumes`
 
-#### Docker Production Build
-
-run `docker compose -f ./docker/compose/docker-compose.prod.yaml build` to build the production server.
-
 ##### Known Issues
 
 The client app gets this error:
@@ -57,3 +53,7 @@ _workaround: remove mounted node_modules from the docker-compose.dev.yaml file, 
 
 The server app gets this error: _Adress already in use_
 _workaround: restart containers_
+
+#### Docker Production Build
+
+run `docker compose -f ./docker/compose/docker-compose.prod.yaml build` to build the production server.
