@@ -34,14 +34,39 @@ services:
       - type: bind
         source: ../../@app/server
         target: /var/www/@app/server
+    links:
+      - mongo
     ports:
       - 4000:4000
     networks:
       - frontend
       - backend
 
+  mongo:
+    image: mongo:4.4.29
+    container_name: ctr_mongo_dev
+    command: mongod --auth --logpath=/dev/null # --quiet
+    env_file: '../../@app/server/.env'
+    ports:
+      - '27019:27017'
+    restart: 'unless-stopped'
+    volumes:
+      - db_data:/data/db
+      - ../../@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - backend
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_NON_ROOT_USERNAME: ${MONGO_DB_USERNAME}
+      MONGO_NON_ROOT_PASSWORD: ${MONGO_DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_NAME}
+
 networks:
   frontend:
     name: net_morepo-frontend_dev
   backend:
     name: net_monorepo-backend_dev
+
+volumes:
+  db_data:

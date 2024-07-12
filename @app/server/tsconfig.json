@@ -4,8 +4,6 @@
     "lib": ["ESNext", "esnext.asynciterable"],
     "target": "es2020",
     "baseUrl": ".",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
     "allowJs": true,
     "rootDir": "./src",
     "outDir": "./dist"

@@ -22,6 +22,7 @@ WORKDIR $APP_WORKDIR
 
 COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/dist ./@app/server/dist
 COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/package.json ./@app/server/package.json
+COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/.env ./@app/server/.env
 COPY --chown=node:node --link package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN npm install -g pnpm
