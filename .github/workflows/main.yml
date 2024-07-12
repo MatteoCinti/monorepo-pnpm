@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'add-github-actions'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      # - name: Create env file
+      #   run: |
+      #     touch .env
+      #     echo "${{ secrets.SERVER_ENV_PROD }}" > .env
+      #     cat .env
+      - name: Build image
+        run: docker compose -f ./docker/compose/docker-compose.dev.yaml build
