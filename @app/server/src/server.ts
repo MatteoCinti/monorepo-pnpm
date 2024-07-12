@@ -27,7 +27,7 @@ app.get('/serverTime', async (_req, res) => {
 
     res.json({
       serverTime: localTime,
-      dbConnection: !mongoDb.get()
+      dbConnection: !!mongoDb.get()
     });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching data' });
