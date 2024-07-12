@@ -46,6 +46,10 @@ On first build of the container MongoDB will create users for the database if yo
 
 `docker compose -f ./docker/compose/docker-compose.dev.yaml down --rmi=all --volumes`
 
+#### Docker Production Build
+
+run `docker compose -f ./docker/compose/docker-compose.prod.yaml build` to build the production server.
+
 ##### Known Issues
 
 The client app gets this error:
