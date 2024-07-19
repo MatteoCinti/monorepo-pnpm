@@ -34,6 +34,8 @@ services:
       - type: bind
         source: ../../@app/server
         target: /var/www/@app/server
+      - type: volume
+        target: /var/www/@app/server/node_modules
     links:
       - mongo
     ports:

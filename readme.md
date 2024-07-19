@@ -24,16 +24,22 @@ You can add a .env file in the docker folder to change the default configuration
 
 #### Local Development
 
-run `pnpm monorepo-init` to initialize the monorepo.
-run `pnpm install` to install all dependencies.
-run `pnpm dev` to start the development server.
-run `pnpm build` to build the project.
-run `pnpm start` to start the production server.
+- run `pnpm monorepo:init` to initialize the monorepo.
+
+  - update env files accordingly.
+
+- run `pnpm install` to install all dependencies.
+
+- run `pnpm dev` to start the development server.
+
+- run `pnpm build` to build the project.
+
+- run `pnpm start` to start the production server.
 
 #### Docker Local Development
 
-run `docker compose -f ./docker/compose/docker-compose.dev.yaml build` to build the development server.
-run `docker compose -f ./docker/compose/docker-compose.dev.yaml up` to start the development server.
+- run `docker compose -f ./docker/compose/docker-compose.dev.yaml build` to build the development server.
+- run `docker compose -f ./docker/compose/docker-compose.dev.yaml up` to start the development server.
 
 Note: _the project is currently setup to run linter in development watch mode to enforce best practices while coding you can remove that easily tweaking the dev commands_
 
