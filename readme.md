@@ -41,6 +41,8 @@ You can add a .env file in the docker folder to change the default configuration
 - run `docker compose -f ./docker/compose/docker-compose.dev.yaml build` to build the development server.
 - run `docker compose -f ./docker/compose/docker-compose.dev.yaml up` to start the development server.
 
+**WINDOWS**: Use the command dev:windows in Dockerfile
+
 Note: _the project is currently setup to run linter in development watch mode to enforce best practices while coding you can remove that easily tweaking the dev commands_
 
 _Remove eslint plugin from `@app/client/vite.config.ts`_

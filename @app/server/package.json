@@ -7,9 +7,10 @@
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "rm -rf ./dist && swc src --out-dir dist",
+    "build": "swc src --out-dir dist",
     "start": "node dist/src/server.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "dev:windows": "nodemon --legacy-watch"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -38,6 +38,7 @@ services:
         target: /var/www/@app/server/node_modules
     links:
       - mongo
+      - mysql
     ports:
       - 4000:4000
     networks:
@@ -69,6 +70,8 @@ services:
     restart: always
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - backend
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: example

@@ -7,14 +7,14 @@ import reactLogo from './assets/react.svg';
 function App() {
   const [count, setCount] = useState(0);
   const [backendTime, setBackendTime] = useState('UNKOWN');
-  const [successDbConnectetion, setSuccessDbConnectetion] = useState(false);
+  const [mongoDbConnectetion, setMongoDbConnectetion] = useState(false);
 
   useEffect(() => {
-    fetch('/api/serverTime')
+    fetch('/api/checkConnections')
       .then((res) => res.json())
       .then((data) => {
         setBackendTime(data.serverTime);
-        setSuccessDbConnectetion(data.dbConnection);
+        setMongoDbConnectetion(data.mogodbConnection);
       });
   }, []);
 
@@ -50,8 +50,8 @@ function App() {
 
       <div className="db-card">
         <h1>
-          You are {successDbConnectetion ? 'successfully' : 'NOT'} connected to
-          the database
+          You are {mongoDbConnectetion ? 'successfully' : 'NOT'} connected to
+          the Mongo database
         </h1>
       </div>
 

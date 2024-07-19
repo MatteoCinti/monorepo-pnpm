@@ -18,16 +18,16 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', async (_req, res) => {
-  res.json({ message: 'welcome' });
+  res.json({ message: 'ewfwe' });
 });
 
-app.get('/serverTime', async (_req, res) => {
+app.get('/checkConnections', async (_req, res) => {
   try {
     const localTime = new Date().toLocaleString();
 
     res.json({
       serverTime: localTime,
-      dbConnection: !!mongoDb.get()
+      mongodbConnection: !!mongoDb.get()
     });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching data' });
