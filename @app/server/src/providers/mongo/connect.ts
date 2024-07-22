@@ -11,6 +11,8 @@ async function connect(callback?: () => void) {
   try {
     const client = new MongoClient(mongoDbUrl);
     await client.connect();
+    // eslint-disable-next-line no-console
+    console.error('MongoDB Connected!');
     mongodb = client;
 
     if (callback) return callback();
@@ -29,7 +31,7 @@ async function get() {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error connecting to the database', error);
-    return error;
+    throw error;
   }
 }
 
@@ -41,4 +43,9 @@ function db() {
   return mongodb.db(dbName);
 }
 
-export default { connect, get, close, db };
+export default {
+  connect,
+  get,
+  close,
+  db
+};

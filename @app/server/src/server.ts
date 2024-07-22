@@ -5,6 +5,7 @@ import express, { Express } from 'express';
 
 import handleError from './error-handler';
 import mongoDb from './providers/mongo';
+import mysql from './providers/mysql';
 
 const app: Express = express();
 const port = Number(process.env.PORT ?? 4000);
@@ -37,9 +38,13 @@ app.get('/checkConnections', async (_req, res) => {
 // Error handler middleware
 app.use(handleError);
 
-mongoDb.connect(() => {
+async function init() {
+  await mysql.connect();
+  await mongoDb.connect();
   app.listen(port, () => {
     // eslint-disable-next-line no-console
-    console.log(`Server running on port ${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
   });
-});
+}
+
+init();

@@ -11,5 +11,5 @@ RUN npm install -g pnpm
 RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --frozen-lockfile
 
 EXPOSE 4000
-# ENTRYPOINT [ "pnpm", "srv", "dev:windows"]
-ENTRYPOINT [ "pnpm", "srv", "dev"]
+ENTRYPOINT [ "pnpm", "srv", "dev:windows"]
+# ENTRYPOINT [ "pnpm", "srv", "dev"]
