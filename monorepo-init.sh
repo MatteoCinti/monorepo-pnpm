@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-SERVER_ENV=@app/server/.env
-if [ ! -f "$SERVER_ENV" ]; then
-    echo "creating $SERVER_ENV"
-    cp $SERVER_ENV.base $SERVER_ENV
+ENV_FILE=.env
+if [ ! -f "$ENV_FILE" ]; then
+    echo "creating $ENV_FILE"
+    cp $ENV_FILE.base $ENV_FILE
 else 
-    echo "$SERVER_ENV already exists"    
+    echo "$ENV_FILE already exists"    
 fi

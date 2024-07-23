@@ -1,4 +1,3 @@
-version: '3.9'
 name: monorepo_dev
 services:
   web-app:
@@ -6,16 +5,16 @@ services:
     image: img_monorepo-web-app_dev
     container_name: ctr_web-app_dev
     build:
-      context: ../../
-      dockerfile: ./docker/build/Dockerfile.client.dev
+      context: ./
+      dockerfile: ./@app/client/build/Dockerfile.client.dev
     volumes:
       - type: bind
-        source: ../../@app/client
+        source: ./@app/client
         target: /var/www/@app/client
       - type: volume
         target: /var/www/@app/client/node_modules
       - type: bind
-        source: ../../@app/client/vite.config.ts
+        source: ./@app/client/vite.config.ts
         target: /var/www/@app/client/vite.config.ts
     environment:
       - NETWORK_ENV=docker
@@ -28,11 +27,11 @@ services:
     image: img_morepo-api_dev
     container_name: ctr_api_dev
     build:
-      context: ../../
-      dockerfile: ./docker/build/Dockerfile.server.dev
+      context: ./
+      dockerfile: ./@app/server/build/Dockerfile.server.dev
     volumes:
       - type: bind
-        source: ../../@app/server
+        source: ./@app/server
         target: /var/www/@app/server
       - type: volume
         target: /var/www/@app/server/node_modules
@@ -48,14 +47,13 @@ services:
   mongo:
     image: mongo:4.4.29
     container_name: ctr_mongo_dev
+    restart: 'unless-stopped'
     command: mongod --auth --logpath=/dev/null # --quiet
-    env_file: '../../@app/server/.env'
     ports:
       - '27019:27017'
-    restart: 'unless-stopped'
     volumes:
       - mongodb_data:/data/db
-      - ../../@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - backend
     environment:
@@ -67,14 +65,15 @@ services:
 
   mysql:
     image: mysql:8.4.1
-    restart: always
+    container_name: ctr_mysql_dev
+    restart: 'unless-stopped'
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
       - backend
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
+      MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 

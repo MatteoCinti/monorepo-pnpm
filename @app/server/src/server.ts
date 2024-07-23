@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import './init-dotenv';
 
 import cors from 'cors';
 import express, { Express } from 'express';
@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', async (_req, res) => {
-  res.json({ message: 'ewfwe' });
+  res.json({ message: 'Welcome' });
 });
 
 app.get('/checkConnections', async (_req, res) => {

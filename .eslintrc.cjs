@@ -32,6 +32,8 @@ module.exports = {
     'import/named': 'off',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+    'react/react-in-jsx-scope': 'off',
+    'no-unused-vars': 'off',
     'check-file/filename-naming-convention': [
       'error',
       {
@@ -42,14 +44,12 @@ module.exports = {
         ignoreMiddleExtensions: true
       }
     ],
-    'react/react-in-jsx-scope': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {
         devDependencies: true
       }
     ],
-    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
       {

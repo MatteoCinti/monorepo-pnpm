@@ -1,4 +1,3 @@
-version: '3.9'
 name: monorepo_prod
 services:
   web-app:
