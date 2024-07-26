@@ -39,12 +39,21 @@ app.get('/checkConnections', async (_req, res) => {
 app.use(handleError);
 
 async function init() {
-  await mysql.connect();
-  await mongoDb.connect();
-  app.listen(port, () => {
+  try {
+    await mysql.connect();
+    await mongoDb.connect();
+    app.listen(port, () => {
+      // eslint-disable-next-line no-console
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(`Server is running on http://localhost:${port}`);
-  });
+    console.error(
+      "Error connecting to the database, can't initialise server",
+      error
+    );
+    process.exit(1);
+  }
 }
 
 init();

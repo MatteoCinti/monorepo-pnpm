@@ -4,7 +4,7 @@ ARG APP_WORKDIR=/var/www
 
 WORKDIR $APP_WORKDIR
 
-COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs ./
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs .env ./
 COPY @app/server/package.json ./@app/server/package.json
 
 RUN npm install -g pnpm
@@ -22,7 +22,7 @@ WORKDIR $APP_WORKDIR
 
 COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/dist ./@app/server/dist
 COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/package.json ./@app/server/package.json
-COPY --chown=node:node --link --from=build  $APP_WORKDIR/@app/server/.env ./@app/server/.env
+COPY --chown=node:node --link --from=build  $APP_WORKDIR/.env ./.env
 COPY --chown=node:node --link package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN npm install -g pnpm

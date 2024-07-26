@@ -9,18 +9,15 @@ const con = mysql.createConnection({
   password: mysqlPassword
 });
 
-async function connect(callback?: () => void) {
+async function connect() {
   try {
     const connection = await con.connect();
     // eslint-disable-next-line no-console
     console.log('Mysql Connected!');
-
-    if (callback) return callback();
-
     return connection;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error connecting to the database', error);
+    console.error('Error connecting to the Mysql database', error);
     throw error;
   }
 }

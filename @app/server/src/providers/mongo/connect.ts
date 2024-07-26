@@ -7,7 +7,7 @@ const dbName = process.env.MONGO_DATABASE_NAME;
 const mongoDbUrl = `mongodb://${dbUser}:${dbPsw}@mongo:27017/${dbName}?authMechanism=DEFAULT`;
 let mongodb: MongoClient;
 
-async function connect(callback?: () => void) {
+async function connect() {
   try {
     const client = new MongoClient(mongoDbUrl);
     await client.connect();
@@ -15,13 +15,11 @@ async function connect(callback?: () => void) {
     console.error('MongoDB Connected!');
     mongodb = client;
 
-    if (callback) return callback();
-
     return mongodb;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error connecting to the database', error);
-    return error;
+    console.error('Error connecting to the Mongo database ', error);
+    throw error;
   }
 }
 async function get() {
@@ -30,7 +28,7 @@ async function get() {
     return await connect();
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error connecting to the database', error);
+    console.error('Error connecting to the Mongo database', error);
     throw error;
   }
 }

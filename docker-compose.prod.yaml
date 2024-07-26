@@ -4,9 +4,10 @@ services:
     init: true
     image: img_monorepo-web-app_prod
     container_name: ctr_web-app_prod
+    env_file: './.env'
     build:
-      context: ../../
-      dockerfile: ./docker/build/Dockerfile.client.prod
+      context: ./
+      dockerfile: ./@app/client/build/Dockerfile.client.prod
     volumes:
       - nginx-log:/var/log/nginx
     environment:
@@ -20,8 +21,14 @@ services:
     image: img_morepo-api_prod
     container_name: ctr_api_prod
     build:
-      context: ../../
-      dockerfile: ./docker/build/Dockerfile.server.prod
+      context: ./
+      dockerfile: ./@app/server/build/Dockerfile.server.prod
+    depends_on:
+      mongo:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+        restart: true
     ports:
       - 4000:4000
     networks:
@@ -31,22 +38,35 @@ services:
   mongo:
     image: mongo:4.4.29
     container_name: ctr_mongo_prod
+    restart: 'unless-stopped'
     command: mongod --auth --logpath=/dev/null # --quiet
-    env_file: '../../@app/server/.env'
+    env_file: './.env'
     ports:
       - '27021:27017'
-    restart: 'unless-stopped'
     volumes:
-      - db_data:/data/db¨
-      - ../../@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongodb_data:/data/db
+      - ./@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:8.4.1
+    container_name: ctr_mysql_prod
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping']
+      interval: 30s
+      timeout: 2s
+      retries: 10
+    volumes:
+      - mysql_data:/var/lib/mysql
     networks:
       - backend
     environment:
-      MONGODB_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-      MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
-      MONGO_NON_ROOT_USERNAME: ${MONGO_DB_USERNAME}
-      MONGO_NON_ROOT_PASSWORD: ${MONGO_DB_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
 networks:
   frontend:
@@ -55,6 +75,7 @@ networks:
     name: net_monorepo-backend_prod
 
 volumes:
-  db_data:
+  mongodb_data:
+  mysql_data:
   nginx-log:
     driver: local
