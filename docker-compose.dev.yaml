@@ -1,0 +1,92 @@
+name: monorepo_dev
+services:
+  web-app:
+    init: true
+    image: img_monorepo-web-app_dev
+    container_name: ctr_web-app_dev
+    env_file: './.env'
+    build:
+      context: ./
+      dockerfile: ./@app/client/build/Dockerfile.client.dev
+    volumes:
+      - type: bind
+        source: ./@app/client
+        target: /var/www/@app/client
+      - type: volume
+        target: /var/www/@app/client/node_modules
+      - type: bind
+        source: ./@app/client/vite.config.ts
+        target: /var/www/@app/client/vite.config.ts
+    environment:
+      - NETWORK_ENV=docker
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+
+  api:
+    image: img_morepo-api_dev
+    container_name: ctr_api_dev
+    build:
+      context: ./
+      dockerfile: ./@app/server/build/Dockerfile.server.dev
+    volumes:
+      - type: bind
+        source: ./@app/server
+        target: /var/www/@app/server
+      - type: volume
+        target: /var/www/@app/server/node_modules
+    depends_on:
+      mongo:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+        restart: true
+    ports:
+      - 4000:4000
+    networks:
+      - frontend
+      - backend
+
+  mongo:
+    image: mongo:4.4.29
+    container_name: ctr_mongo_dev
+    restart: 'unless-stopped'
+    command: mongod --auth --logpath=/dev/null # --quiet
+    ports:
+      - '27019:27017'
+    volumes:
+      - mongodb_data:/data/db
+      - ./@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    env_file: './.env'
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:8.4.1
+    container_name: ctr_mysql_dev
+    restart: 'unless-stopped'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping']
+      interval: 10s
+      timeout: 2s
+      retries: 10
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+networks:
+  frontend:
+    name: net_morepo-frontend_dev
+  backend:
+    name: net_monorepo-backend_dev
+
+volumes:
+  mongodb_data:
+  mysql_data:

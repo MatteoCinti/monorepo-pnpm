@@ -1,0 +1,81 @@
+name: monorepo_prod
+services:
+  web-app:
+    init: true
+    image: img_monorepo-web-app_prod
+    container_name: ctr_web-app_prod
+    env_file: './.env'
+    build:
+      context: ./
+      dockerfile: ./@app/client/build/Dockerfile.client.prod
+    volumes:
+      - nginx-log:/var/log/nginx
+    environment:
+      - NETWORK_ENV=docker
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+
+  api:
+    image: img_morepo-api_prod
+    container_name: ctr_api_prod
+    build:
+      context: ./
+      dockerfile: ./@app/server/build/Dockerfile.server.prod
+    depends_on:
+      mongo:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+        restart: true
+    ports:
+      - 4000:4000
+    networks:
+      - frontend
+      - backend
+
+  mongo:
+    image: mongo:4.4.29
+    container_name: ctr_mongo_prod
+    restart: 'unless-stopped'
+    command: mongod --auth --logpath=/dev/null # --quiet
+    env_file: './.env'
+    ports:
+      - '27021:27017'
+    volumes:
+      - mongodb_data:/data/db
+      - ./@app/server/src/providers/mongo/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:8.4.1
+    container_name: ctr_mysql_prod
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping']
+      interval: 30s
+      timeout: 2s
+      retries: 10
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+networks:
+  frontend:
+    name: net_morepo-frontend_prod
+  backend:
+    name: net_monorepo-backend_prod
+
+volumes:
+  mongodb_data:
+  mysql_data:
+  nginx-log:
+    driver: local

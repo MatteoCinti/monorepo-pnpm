@@ -4,11 +4,12 @@ ARG APP_WORKDIR=/var/www
 
 WORKDIR $APP_WORKDIR
 
-COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs ./
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.eslintrc.cjs ./.env ./
 COPY @app/server ./@app/server
 
 RUN npm install -g pnpm
 RUN --mount=type=cache,id=pnpm,target=$APP_WORKDIR/pnpm/store pnpm install --frozen-lockfile
 
 EXPOSE 4000
-ENTRYPOINT [ "pnpm", "srv", "dev"]
+ENTRYPOINT [ "pnpm", "srv", "dev:windows"]
+# ENTRYPOINT [ "pnpm", "srv", "dev"]
